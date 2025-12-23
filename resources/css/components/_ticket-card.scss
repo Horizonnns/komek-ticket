@@ -1,0 +1,58 @@
+@use "../abstracts/index" as *;
+
+.ticket-card {
+    width: 20%;
+    background: $color-white;
+    color: $color-dark;
+    padding: $gutter;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+
+    &__title {
+        color: $color-primary;
+        font-size: 1.5rem;
+
+        @include mobile {
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.ticket-sessions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+
+    .session {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 8px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: $color-primary;
+            color: $color-dark;
+            border-color: $color-primary;
+        }
+
+        &-time {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        &-hall {
+            font-size: 10px;
+            opacity: 0.7;
+        }
+    }
+}
