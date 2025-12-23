@@ -1,0 +1,10 @@
+@use "abstracts/variables" as *;
+@use "base/reset";
+@use "components/header";
+@use "components/footer";
+
+body {
+    background-color: $color-dark;
+    font-family: $font-main;
+    color: $color-white;
+}
