@@ -8,7 +8,7 @@ Route::get('/', function () {
             'id' => 1,
             'title' => 'Праздники',
             "genre" => "комедия",
-            'poster' => 'bg-ticket.jpg',
+            'poster' => 'posters/prazdniki.svg',
             "premiere" => true,
             "places" => [
               [
@@ -59,7 +59,7 @@ Route::get('/', function () {
             'id' => 2,
             'title' => 'Мег 2: Бездна',
             "genre" => "экшен, триллер",
-            'poster' => 'bg-ticket.jpg',
+            'poster' => 'posters/meg2.svg',
             "premiere" => false,
             "places" => [
               [
@@ -89,7 +89,7 @@ Route::get('/', function () {
             'id' => 3,
             'title' => 'Заложники',
             "genre" => "экшен, триллер",
-            'poster' => 'bg-ticket.jpg',
+            'poster' => 'posters/zalozhniky.svg',
             "premiere" => false,
             "places" => [
               [
@@ -112,7 +112,7 @@ Route::get('/', function () {
             'id' => 4,
             'title' => 'Леди Баг и Супер-Кот: Пробуждение силы',
             "genre" => "фентези, боевик, мелодрама, мультфильм, комедия",
-            'poster' => 'bg-ticket.jpg',
+            'poster' => 'posters/ledi-bag.svg',
             "premiere" => false,
             "places" => [
               [
@@ -135,7 +135,7 @@ Route::get('/', function () {
             'id' => 5,
             'title' => 'Когда не загрузилась афиша',
             "genre" => "комедия",
-            'poster' => 'bg-ticket.jpg',
+            'poster' => 'posters/afisha-nezagruzilas.svg',
             "premiere" => true,
             "places" => [
               [
@@ -158,7 +158,7 @@ Route::get('/', function () {
             'id' => 6,
             'title' => 'Руслан и Людмила. Больше, чем сказка',
             "genre" => "анимационое, приключение",
-            'poster' => 'bg-ticket.jpg',
+            'poster' => 'posters/ruslan-i-ludmila.svg',
             "premiere" => true,
             'sessions'=> 'Сеансы на Завтра'
         ],
