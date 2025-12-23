@@ -1,12 +1,14 @@
 @use "../abstracts/index" as *;
 
 .ticket-card {
-    width: 20%;
+    width: 267px;
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
     background: $color-white;
     color: $color-dark;
     padding: $gutter;
-    transition: transform 0.3s ease;
-    overflow: hidden;
+    // transition: transform 0.3s ease;
 
     &:hover {
         transform: translateY(-5px);
@@ -19,6 +21,47 @@
         @include mobile {
             font-size: 1.2rem;
         }
+    }
+
+    .ticket-poster {
+        width: 100%;
+        height: 400px;
+        position: relative;
+        margin-bottom: 15px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ticket-badge {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            background: $color-accent;
+            color: white;
+            padding: 4px 12px;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    }
+
+    .ticket-title {
+        font-size: 24px;
+        margin: 0 0 8px 0;
+        color: $color-text-dark;
+    }
+
+    .ticket-genre {
+        display: inline-block;
+        background: $color-bg-tag;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        color: $color-text-gray;
+        margin-bottom: 20px;
     }
 }
 
