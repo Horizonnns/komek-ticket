@@ -2,32 +2,26 @@
 
 .ticket-card {
     width: 267px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    font-family: sans-serif;
-    background: $color-white;
-    color: $color-dark;
-    padding: $gutter;
-    // transition: transform 0.3s ease;
+    font-family: $font-main;
+    color: $color-text-dark;
 
     &:hover {
-        transform: translateY(-5px);
-    }
-
-    &__title {
-        color: $color-primary;
-        font-size: 1.5rem;
-
-        @include mobile {
-            font-size: 1.2rem;
+        .ticket-poster {
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
         }
     }
 
     .ticket-poster {
         width: 100%;
-        height: 400px;
+        overflow: hidden;
         position: relative;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
+        // border-radius: 12px;
+        transition: all 0.7s ease;
 
         img {
             width: 100%;
@@ -35,67 +29,174 @@
             object-fit: cover;
         }
 
-        .ticket-badge {
+        .badge-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+        }
+
+        .age-badge {
+            position: absolute;
+            bottom: 10px;
+            left: 4px;
+            background: rgba(43, 82, 120, 0.9);
+            color: $color-white;
+            padding: 8px 11px;
+            border-radius: 1px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .premiere-badge {
             position: absolute;
             top: 10px;
-            right: 0;
-            background: $color-accent;
-            color: white;
+            right: 8px;
+            background: $color-primary;
+            color: $color-white;
             padding: 4px 12px;
             text-transform: uppercase;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
         }
     }
 
     .ticket-title {
-        font-size: 24px;
-        margin: 0 0 8px 0;
+        font-size: 20px;
+        line-height: 1.2;
+        font-weight: 700;
         color: $color-text-dark;
+        margin-bottom: 9px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .genre-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 20px;
     }
 
     .ticket-genre {
-        display: inline-block;
         background: $color-bg-tag;
-        padding: 4px 8px;
-        border-radius: 4px;
+        padding: 4px;
+        border-radius: 3px;
         font-size: 12px;
         color: $color-text-gray;
-        margin-bottom: 20px;
     }
-}
 
-.ticket-sessions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 15px;
-
-    .session {
+    .ticket-sessions {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        padding: 8px 12px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.2s ease;
+        flex-wrap: wrap;
+        row-gap: 20px;
+        column-gap: 10px;
+        margin-top: auto;
 
-        &:hover {
-            background: $color-primary;
-            color: $color-dark;
-            border-color: $color-primary;
+        .session-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.7s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                transition: all 0.2s ease;
+            }
         }
 
-        &-time {
-            font-weight: bold;
+        .session-box {
+            display: flex;
+            overflow: hidden;
+            border-radius: 6px;
+            flex-direction: column;
+
+            border: 1px solid $color-primary;
+            transition: all 0.7s ease;
+
+            &:hover {
+                border: 1px solid $color-dark;
+                transition: all 0.2s ease;
+
+                .time {
+                    background-color: $color-dark;
+                    transition: all 0.2s ease;
+                }
+            }
+
+            &:active {
+                border: 1px solid $color-primary;
+                transition: all 0.2s ease;
+
+                .time {
+                    background-color: $color-primary;
+                    transition: all 0.2s ease;
+                }
+            }
+
+            .time {
+                background: $color-primary;
+                color: $color-white;
+                font-size: 15px;
+                font-weight: 700;
+                padding: 7px 14px;
+                text-align: center;
+                transition: all 0.7s ease;
+            }
+
+            .info {
+                padding: 4px;
+                display: flex;
+                font-size: 11px;
+                font-weight: 500;
+                align-items: center;
+                flex-direction: row;
+                background: $color-white;
+                justify-content: space-between;
+                color: $color-text-gray-dark;
+            }
+        }
+
+        .hall {
+            font-size: 11px;
+            color: $color-text-gray-dark;
+        }
+
+        .btn-sessions {
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
             font-size: 14px;
-        }
+            font-weight: 700;
+            cursor: pointer;
+            color: $color-white;
+            background: $color-primary;
+            transition: all 0.7s ease;
 
-        &-hall {
-            font-size: 10px;
-            opacity: 0.7;
+            &:hover {
+                transform: translateY(-2px);
+                transition: all 0.2s ease;
+                background: $color-dark;
+            }
+
+            &:active {
+                background: $color-primary;
+                transition: all 0.2s ease;
+            }
         }
     }
 }
