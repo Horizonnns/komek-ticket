@@ -9,6 +9,7 @@ Route::get('/', function () {
       'title' => 'Праздники',
       "genre" => ["комедия"],
       'poster' => 'posters/prazdniki.svg',
+      'show_dates' => ['today'],
       "premiere" => true,
       "age_rating" => "12+",
       "places" => [
@@ -61,6 +62,7 @@ Route::get('/', function () {
       'title' => 'Мег 2: Бездна',
       "genre" => ["экшен", "триллер"],
       'poster' => 'posters/meg2.svg',
+      'show_dates' => ['today', 'sep-13'],
       "premiere" => false,
       "age_rating" => "16+",
       "places" => [
@@ -92,6 +94,7 @@ Route::get('/', function () {
       'title' => 'Заложники',
       "genre" => ["экшен", "триллер"],
       'poster' => 'posters/zalozhniky.svg',
+      'show_dates' => ['today', 'sep-10',],
       "premiere" => false,
       "age_rating" => "16+",
       "places" => [
@@ -116,6 +119,7 @@ Route::get('/', function () {
       'title' => 'Леди Баг и Супер-Кот: Пробуждение силы',
       "genre" => ["фентези", "боевик", "мелодрама", "мультфильм", "комедия"],
       'poster' => 'posters/ledi-bag.svg',
+      'show_dates' => ['today', 'tomorrow',],
       "premiere" => false,
       "age_rating" => "6+",
       "places" => [
@@ -140,6 +144,7 @@ Route::get('/', function () {
       'title' => 'Когда не загрузилась афиша',
       "genre" => ["комедия"],
       'poster' => 'posters/afisha-nezagruzilas.svg',
+      'show_dates' => ['today', 'sep-11'],
       "premiere" => true,
       // "age_rating" => "12+",
       "places" => [
@@ -164,6 +169,7 @@ Route::get('/', function () {
       'title' => 'Руслан и Людмила. Больше, чем сказка',
       "genre" => ["анимационое", "приключение"],
       'poster' => 'posters/ruslan-i-ludmila.svg',
+      'show_dates' => ['today', 'tomorrow', 'sep-12'],
       "premiere" => true,
       "age_rating" => "6+",
       'sessions' => 'Сеансы на Завтра'

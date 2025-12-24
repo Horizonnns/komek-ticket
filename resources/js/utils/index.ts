@@ -1,3 +1,3 @@
 export * from "./swiper";
 export * from "./ticketAnimation";
-export * from "./initCalendar";
+export * from "./initCalendarFilter";

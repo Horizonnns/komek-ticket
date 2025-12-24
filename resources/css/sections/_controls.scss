@@ -52,14 +52,9 @@
 }
 
 .calendar-bar {
-    // border: 2px solid #3498db;
-    // border-radius: 25px;
     margin: 0 auto;
-    max-width: $container-width;
-    // background-color: $color-blue;
-
-    // padding: 10px 40px;
     overflow-x: auto;
+    max-width: $container-width;
     background-color: $color-white;
 
     &__items {
@@ -81,8 +76,8 @@
         transition: all 0.3s ease;
 
         &.active {
-            background-color: $color-primary;
             color: white;
+            background-color: $color-primary;
         }
 
         &:hover:not(.active) {

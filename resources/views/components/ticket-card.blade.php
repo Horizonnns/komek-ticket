@@ -1,6 +1,7 @@
 @props(['ticket'])
 
-<div class="ticket-card">
+<div class="ticket-card"
+  data-dates="{{ implode(',', $ticket['show_dates'] ?? []) }}">
   <div class="ticket-poster">
     <img src="{{ asset('images/' . $ticket['poster']) }}" alt="{{ $ticket['title'] }}">
 
