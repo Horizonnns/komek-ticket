@@ -5,12 +5,11 @@
     margin: 0 auto;
     color: $color-gray-light;
     max-width: $container-width;
-    background-color: $color-header-bg;
 
     &__container {
         display: flex;
-        padding: 24px 40px;
         align-items: center;
+        padding: 24px 40px;
         background-color: $color-blue;
         justify-content: space-between;
     }
@@ -26,10 +25,86 @@
 
         &-link {
             font-size: 13px;
-            color: $color-light-gray;
+            color: $color-gray;
         }
     }
 
+    &__divider {
+        border: none;
+        border-top: 1px solid $color-gray;
+    }
+
+    &__middle {
+        display: flex;
+        padding: 28px 40px;
+        justify-content: space-between;
+        background-color: $color-blue-dark;
+    }
+
+    &__column-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+        color: $color-white;
+    }
+
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        a {
+            font-size: 15px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__payment {
+        &-icons {
+            gap: 22px;
+            display: flex;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__legal-text {
+        font-size: 13px;
+        line-height: 1.5;
+        opacity: 0.6;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        padding: 20px $gutter;
+        justify-content: space-between;
+        background-color: $color-blue-dark;
+    }
+
+    &__socials {
+        gap: 15px;
+        display: flex;
+        align-items: center;
+
+        img {
+            width: 32px;
+            height: 32px;
+            filter: grayscale(1);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    &__copyright {
+        font-size: 14px;
+        opacity: 0.6;
     }
 }
 
@@ -39,6 +114,17 @@
             flex-direction: column;
             gap: 20px;
             text-align: center;
+        }
+
+        &__middle,
+        &__bottom {
+            flex-direction: column;
+            text-align: center;
+            gap: 30px;
+        }
+
+        &__payment-icons {
+            justify-content: center;
         }
     }
 }

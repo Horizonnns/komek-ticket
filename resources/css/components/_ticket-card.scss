@@ -199,3 +199,15 @@
         }
     }
 }
+
+@include tablet {
+    .ticket-card {
+        width: 400px;
+    }
+}
+
+@include mobile {
+    .ticket-card {
+        min-width: 350px;
+    }
+}

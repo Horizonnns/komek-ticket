@@ -5,7 +5,7 @@
 
   <div class="header__container">
     <div class="header__logo">
-      <img src="{{ asset('images/icons/logo/komek-logo.svg') }}" alt="Komek By Ticket">
+      <img src="{{ asset('images/icons/komek-logo.svg') }}" alt="Komek By Ticket">
     </div>
 
     <div class="header__info">
