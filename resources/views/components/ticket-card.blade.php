@@ -3,20 +3,30 @@
 <div class="ticket-card">
     <div class="ticket-poster">
         <img src="{{ asset('images/' . $ticket['poster']) }}" alt="{{ $ticket['title'] }}">
-        @if($ticket['premiere'])
-            <span class="ticket-badge">Премьера</span>
-        @endif
+
+        <div class="badge-container">
+            @if(isset($ticket['age_rating']))
+                <span class="age-badge">{{ $ticket['age_rating'] }}</span>
+            @endif
+            @if($ticket['premiere'])
+                <span class="premiere-badge">Премьера</span>
+            @endif
+        </div>
     </div>
 
-    <h3 class="ticket-title">{{ $ticket['title'] }}</h3>
+    <div class="ticket-wrapper">
+      <h3 class="ticket-title">{{ $ticket['title'] }}</h3>
+
     <div class="genre-container">
-        <span class="ticket-genre">{{ $ticket['genre'] }}</span>
+        @foreach($ticket['genre'] as $genre)
+            <span class="ticket-genre">{{ $genre }}</span>
+        @endforeach
     </div>
 
     <div class="ticket-sessions">
         @isset($ticket['places'])
             @foreach($ticket['places'] as $place)
-                <div class="session-item">
+                <button class="session-item">
                     <div class="session-box">
                         <span class="time">{{ $place['time'] }}</span>
                         <div class="info">
@@ -25,8 +35,13 @@
                         </div>
                     </div>
                     <span class="hall">Зал {{ $place['hall'] }}</span>
-                </div>
+                </button>
             @endforeach
         @endisset
+
+        @isset($ticket['sessions'])
+            <button class="btn-sessions">{{ $ticket['sessions'] }}</button>
+        @endisset
     </div>
+  </div>
 </div>
