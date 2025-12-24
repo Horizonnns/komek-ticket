@@ -1,6 +1,23 @@
 <header class="header">
-  <div class="header__slide">
-    <img src="{{ asset('images/slides/main-slide.svg') }}" alt="Slide">
+  <div class="header__slide swiper">
+    <div class="swiper-wrapper">
+      @php
+      $videos = [
+      'https://msk-cdp10.playfamily.ru/vod/cid/adfc1fa27cf6-1766756553-utBcHDduePMXO4Qts9aruQ/storage127/trl/a2e42d5c-83f0-4ff3-995c-eefe6c5328ca.webm',
+      'https://spb-cdp33.playfamily.ru/vod/cid/adfc1fa27cf6-1766757031-begVXY6ufWfPbWF4zpj7BQ/storage123/trl/28cfa814-bb0d-4314-b350-eddb1ee5016c.webm',
+      'https://spb-cdp40.playfamily.ru/vod/cid/adfc1fa27cf6-1766763695-allQe-rUAswF2MxMgM4qJg/storage121/trl/739086c2-2858-4632-aa7e-16cbb2658e0b.webm',
+      'https://msk-cdp6.playfamily.ru/vod/cid/adfc1fa27cf6-1766758722-hCL2g-ZOjrVSXBNuBXD0mQ/storage111/trl/78549c9b-f168-42dc-abf9-5f2741736ee7.webm'
+      ];
+      @endphp
+
+      @foreach($videos as $url)
+      <div class="swiper-slide">
+        <video src="{{ $url }}" autoplay loop muted playsinline></video>
+      </div>
+      @endforeach
+    </div>
+
+    <div class="swiper-pagination"></div>
   </div>
 
   <div class="header__container">

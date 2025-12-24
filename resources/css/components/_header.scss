@@ -7,12 +7,28 @@
     max-width: $container-width;
     background-color: $color-blue;
 
-    &__slide {
+    .swiper-wrapper {
         width: 100%;
+        height: 450px;
+        overflow: hidden;
+        position: relative;
+
+        video,
         img {
             width: 100%;
-            height: auto;
+            height: 100%;
             display: block;
+            object-fit: cover;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, $color-blue, transparent);
         }
     }
 
@@ -82,6 +98,10 @@
 
 @include tablet {
     .header {
+        &__slide {
+            height: 300px;
+        }
+
         &__container {
             flex-direction: column;
             padding: 30px 20px;
@@ -105,6 +125,14 @@
         &__btn {
             width: 80%;
             max-width: 300px;
+        }
+    }
+}
+
+@include mobile {
+    .header {
+        .swiper-wrapper {
+            height: 300px;
         }
     }
 }
