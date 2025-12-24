@@ -1,6 +1,7 @@
 @use "abstracts/variables" as *;
 @use "abstracts/mixins" as *;
 @use "base/reset";
+@use "base/fonts";
 @use "components/header";
 @use "components/footer";
 @use "components/ticket-card";
