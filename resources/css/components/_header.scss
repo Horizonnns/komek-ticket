@@ -7,6 +7,15 @@
     max-width: $container-width;
     background-color: $color-blue;
 
+    &__slide {
+        width: 100%;
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+
     &__container {
         display: flex;
         padding: 24px 40px;
@@ -20,7 +29,13 @@
 
         &-title {
             color: $color-white;
-            font-size: 16px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        &-sub {
+            font-size: 13px;
+            opacity: 0.7;
         }
     }
 
@@ -34,35 +49,33 @@
         display: flex;
         gap: 15px;
 
-        img {
+        a img {
             width: 32px;
             height: 32px;
-            opacity: 0.8;
-            transition: opacity 0.3s;
+
+            filter: grayscale(0.5);
+            transition: all 0.3s ease;
 
             &:hover {
-                opacity: 1;
+                filter: grayscale(0);
+                transform: scale(1.1);
             }
         }
     }
 
     &__btn {
         color: white;
-        padding: 10px 24px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 500;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 15px;
+        font-weight: 600;
         background-color: $color-primary;
-        transition: all 0.7s ease;
+        box-shadow: 0 4px 15px rgba($color-primary, 0.3);
+        transition: all 0.4s ease;
 
         &:hover {
             filter: brightness(1.1);
-            transition: all 0.2s ease;
-        }
-
-        &:active {
-            filter: brightness(0.9);
-            transition: all 0.2s ease;
+            transform: translateY(-2px);
         }
     }
 }
@@ -71,12 +84,27 @@
     .header {
         &__container {
             flex-direction: column;
-            gap: 20px;
+            padding: 30px 20px;
+            gap: 25px;
             text-align: center;
+        }
+
+        &__logo {
+            margin-bottom: 10px;
+            img {
+                height: 60px;
+            }
         }
 
         &__actions {
             flex-direction: column;
+            width: 100%;
+            gap: 20px;
+        }
+
+        &__btn {
+            width: 80%;
+            max-width: 300px;
         }
     }
 }
