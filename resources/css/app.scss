@@ -15,3 +15,10 @@ body {
     font-family: $font-main;
     color: $color-white;
 }
+
+.container {
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: $container-width;
+    background-color: $color-white;
+}

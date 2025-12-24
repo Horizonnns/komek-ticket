@@ -1,11 +1,7 @@
 @use "../abstracts/index" as *;
 
 .header {
-    background-color: $color-primary;
-    padding: $gutter;
-
-    &__nav {
-        display: flex;
-        justify-content: space-between;
-    }
+    width: 100%;
+    margin: 0 auto;
+    max-width: $container-width;
 }
