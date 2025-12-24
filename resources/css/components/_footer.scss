@@ -1,1 +1,41 @@
 @use "../abstracts/index" as *;
+
+.footer {
+    width: 100%;
+    margin: 0 auto;
+    color: $color-header-text;
+    max-width: $container-width;
+    background-color: $color-header-bg;
+
+    &__container {
+        display: flex;
+        padding: 24px 40px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+
+        &-title {
+            color: $color-white;
+            font-size: 16px;
+        }
+
+        &-link {
+            font-size: 13px;
+            color: $color-header-text;
+        }
+    }
+}
+
+@include tablet {
+    .footer {
+        &__container {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+    }
+}
