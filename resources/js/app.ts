@@ -1,5 +1,9 @@
-const initApp = (): void => {
-    console.log("Komek By Ticket app initialized!");
-};
+document.addEventListener("DOMContentLoaded", () => {
+    const tickets = document.querySelectorAll(".ticket-card");
 
-document.addEventListener("DOMContentLoaded", initApp);
+    tickets.forEach((ticket, index) => {
+        setTimeout(() => {
+            ticket.classList.add("fade-in-visible");
+        }, index * 150);
+    });
+});

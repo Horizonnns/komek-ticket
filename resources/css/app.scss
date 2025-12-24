@@ -6,6 +6,7 @@
 @use "components/footer";
 @use "components/ticket-card";
 @use "sections/tickets";
+@use "base/animations";
 
 body {
     background: url("/public/images/background/background-poster.png") no-repeat
