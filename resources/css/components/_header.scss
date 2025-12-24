@@ -3,9 +3,9 @@
 .header {
     width: 100%;
     margin: 0 auto;
-    color: $color-header-text;
+    color: $color-gray-light;
     max-width: $container-width;
-    background-color: $color-header-bg;
+    background-color: $color-blue;
 
     &__container {
         display: flex;
@@ -22,17 +22,12 @@
             color: $color-white;
             font-size: 16px;
         }
-
-        &-link {
-            font-size: 13px;
-            color: $color-header-text;
-        }
     }
 
     &__actions {
+        gap: 25px;
         display: flex;
         align-items: center;
-        gap: 25px;
     }
 
     &__socials {

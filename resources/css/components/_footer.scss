@@ -3,7 +3,7 @@
 .footer {
     width: 100%;
     margin: 0 auto;
-    color: $color-header-text;
+    color: $color-gray-light;
     max-width: $container-width;
     background-color: $color-header-bg;
 
@@ -11,6 +11,7 @@
         display: flex;
         padding: 24px 40px;
         align-items: center;
+        background-color: $color-blue;
         justify-content: space-between;
     }
 
@@ -25,8 +26,10 @@
 
         &-link {
             font-size: 13px;
-            color: $color-header-text;
+            color: $color-light-gray;
         }
+    }
+
     }
 }
 
