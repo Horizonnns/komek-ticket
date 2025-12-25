@@ -6,4 +6,5 @@ document.addEventListener("DOMContentLoaded", () => {
     utils.initCalendarFilter();
     utils.initBookingSystem();
     utils.initMyTickets();
+    utils.initPaymentSystem();
 });
