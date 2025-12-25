@@ -6,3 +6,4 @@ export * from "./myTickets";
 export * from "./payment";
 export * from "./toast";
 export * from "./registerSW";
+export * from "./storage";

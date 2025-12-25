@@ -1,4 +1,5 @@
 import { toast } from "./toast";
+import { StorageService } from "./storage";
 
 export interface ITicket {
     id: string;
@@ -20,9 +21,7 @@ export const initMyTickets = () => {
     const renderTickets = () => {
         if (!ticketsContainer) return;
 
-        const tickets: ITicket[] = JSON.parse(
-            localStorage.getItem("my_tickets") || "[]"
-        ).reverse();
+        const tickets = StorageService.getTickets().reverse();
 
         if (tickets.length === 0) {
             ticketsContainer.innerHTML =
@@ -33,7 +32,9 @@ export const initMyTickets = () => {
         ticketsContainer.innerHTML = tickets
             .map(
                 (ticket) => `
-            <div class="my-ticket-card" data-id="${ticket.id}">
+            <div class="my-ticket-card ${
+                ticket.paid ? "my-ticket-card--paid" : ""
+            }" data-id="${ticket.id}">
                 <div class="my-ticket-card__content-wrapper">
                     <div class="my-ticket-card__main">
                         <div class="my-ticket-card__header">
@@ -93,16 +94,14 @@ export const initMyTickets = () => {
                 const action = target.getAttribute("data-action");
 
                 if (id && action === "cancel") {
-                    deleteTicket(id);
+                    StorageService.deleteTicket(id);
                     renderTickets();
                     toast.show({
                         message: "Билет успешно отменен",
                         type: "success",
                     });
                 } else if (id && action === "pay") {
-                    const tickets: ITicket[] = JSON.parse(
-                        localStorage.getItem("my_tickets") || "[]"
-                    );
+                    const tickets = StorageService.getTickets();
                     const ticket = tickets.find((t) => t.id === id);
                     if (ticket) {
                         window.dispatchEvent(
@@ -116,25 +115,10 @@ export const initMyTickets = () => {
         });
     };
 
-    const deleteTicket = (id: string) => {
-        const tickets: ITicket[] = JSON.parse(
-            localStorage.getItem("my_tickets") || "[]"
-        );
-        const updatedTickets = tickets.filter((t) => t.id !== id);
-        localStorage.setItem("my_tickets", JSON.stringify(updatedTickets));
-    };
-
     window.addEventListener("ticketPaid", (e: any) => {
         const { id } = e.detail;
-        const tickets: ITicket[] = JSON.parse(
-            localStorage.getItem("my_tickets") || "[]"
-        );
-        const ticketIndex = tickets.findIndex((t) => t.id === id);
-        if (ticketIndex !== -1) {
-            tickets[ticketIndex].paid = true;
-            localStorage.setItem("my_tickets", JSON.stringify(tickets));
-            renderTickets();
-        }
+        StorageService.markAsPaid(id);
+        renderTickets();
     });
 
     myTicketsBtn?.addEventListener("click", () => {
@@ -161,9 +145,5 @@ export const initMyTickets = () => {
 };
 
 export const saveTicket = (ticket: ITicket) => {
-    const existingTickets = JSON.parse(
-        localStorage.getItem("my_tickets") || "[]"
-    );
-    existingTickets.push(ticket);
-    localStorage.setItem("my_tickets", JSON.stringify(existingTickets));
+    StorageService.saveTicket(ticket);
 };
