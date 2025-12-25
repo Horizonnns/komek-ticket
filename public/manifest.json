@@ -1,0 +1,21 @@
+{
+    "name": "Komek Ticket",
+    "short_name": "Komek",
+    "description": "Кинотеатр в вашем кармане - бронируйте и оплачивайте билеты онлайн",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#123d4b",
+    "theme_color": "#e92b43",
+    "icons": [
+        {
+            "src": "/images/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/images/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

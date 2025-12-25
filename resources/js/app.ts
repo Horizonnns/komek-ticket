@@ -7,4 +7,5 @@ document.addEventListener("DOMContentLoaded", () => {
     utils.initBookingSystem();
     utils.initMyTickets();
     utils.initPaymentSystem();
+    utils.registerSW();
 });
