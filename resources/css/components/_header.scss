@@ -39,6 +39,12 @@
         justify-content: space-between;
     }
 
+    &__info-wrapper {
+        display: flex;
+        gap: 40px;
+        align-items: center;
+    }
+
     &__info {
         display: flex;
         flex-direction: column;
@@ -98,22 +104,25 @@
 
 @include tablet {
     .header {
-        &__slide {
-            height: 400px;
+        .swiper-wrapper {
+            height: 350px;
         }
 
         &__container {
             flex-direction: column;
             padding: 30px 20px;
-            gap: 25px;
+            gap: 24px;
             text-align: center;
         }
 
         &__logo {
-            margin-bottom: 10px;
             img {
-                height: 60px;
+                height: 50px;
             }
+        }
+
+        &__info-wrapper {
+            gap: 30px;
         }
 
         &__actions {
@@ -123,8 +132,8 @@
         }
 
         &__btn {
-            width: 80%;
-            max-width: 300px;
+            width: 100%;
+            max-width: 340px;
         }
     }
 }
@@ -132,7 +141,46 @@
 @include mobile {
     .header {
         .swiper-wrapper {
-            height: 300px;
+            height: 200px;
+        }
+
+        &__container {
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        &__logo {
+            img {
+                height: 32px;
+            }
+        }
+
+        &__info-wrapper {
+            gap: 12px;
+            justify-content: center;
+        }
+
+        &__info {
+            &-title {
+                font-size: 13px;
+            }
+            &-sub {
+                display: none;
+            }
+        }
+
+        &__socials {
+            gap: 12px;
+            a img {
+                width: 22px;
+                height: 22px;
+            }
+        }
+
+        &__btn {
+            font-size: 13px;
+            padding: 8px 16px;
+            max-width: 240px;
         }
     }
 }

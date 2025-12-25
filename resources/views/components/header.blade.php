@@ -25,14 +25,16 @@
       <img src="{{ asset('images/icons/komek-logo.svg') }}" alt="Komek By Ticket">
     </div>
 
-    <div class="header__info">
-      <span class="header__info-title">Казахстан</span>
-      <span class="header__info-sub">улица Тестовая 1</span>
-    </div>
+    <div class="header__info-wrapper">
+      <div class="header__info">
+        <span class="header__info-title">Казахстан</span>
+        <span class="header__info-sub">улица Тестовая 1</span>
+      </div>
 
-    <div class="header__info">
-      <a href="tel:+77750000001" class="header__info-title">+7 (775) 000 00 01</a>
-      <span class="header__info-sub">Касса</span>
+      <div class="header__info">
+        <a href="tel:+77750000001" class="header__info-title">+7 (775) 000 00 01</a>
+        <span class="header__info-sub">Касса</span>
+      </div>
     </div>
 
     <div class="header__actions">

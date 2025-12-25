@@ -3,7 +3,7 @@
 .footer {
     width: 100%;
     margin: 0 auto;
-    padding-top: 100px;
+    padding-top: 80px;
     color: $color-gray-light;
     background-color: $color-white;
     max-width: $container-width;
@@ -11,7 +11,7 @@
     &__container {
         display: flex;
         align-items: center;
-        padding: 24px 40px;
+        padding: 40px;
         background-color: $color-blue;
         justify-content: space-between;
     }
@@ -19,116 +19,256 @@
     &__info {
         display: flex;
         flex-direction: column;
+        gap: 4px;
 
         &-title {
             color: $color-white;
             font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: $color-primary;
+            }
         }
 
-        &-link {
+        &-sub {
             font-size: 13px;
-            color: $color-gray;
+            opacity: 0.6;
         }
-    }
-
-    &__divider {
-        border: none;
-        border-top: 1px solid $color-gray;
     }
 
     &__middle {
         display: flex;
-        padding: 28px 40px;
+        padding: 60px 40px;
         justify-content: space-between;
         background-color: $color-blue-dark;
+        gap: 40px;
     }
 
     &__column-title {
-        font-size: 16px;
-        margin-bottom: 12px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 24px;
         color: $color-white;
+        font-weight: 700;
+        opacity: 0.9;
     }
 
     &__nav {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
 
         a {
             font-size: 15px;
             opacity: 0.7;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
+
             &:hover {
                 opacity: 1;
+                transform: translateX(5px);
+                color: $color-white;
             }
         }
     }
 
     &__payment {
+        max-width: 400px;
+
         &-icons {
-            gap: 22px;
+            gap: 30px;
             display: flex;
+            align-items: center;
             margin-bottom: 30px;
+
+            img {
+                height: 32px;
+                width: auto;
+                object-fit: contain;
+                filter: grayscale(1) brightness(1.5);
+                opacity: 0.7;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    filter: grayscale(0) brightness(1);
+                    opacity: 1;
+                }
+            }
         }
     }
 
     &__legal-text {
         font-size: 13px;
-        line-height: 1.5;
-        opacity: 0.6;
+        line-height: 1.6;
+        opacity: 0.5;
+    }
+
+    &__divider {
+        border: none;
+        height: 1px;
+        background: rgba($color-white, 0.1);
+        margin: 0;
     }
 
     &__bottom {
         display: flex;
         align-items: center;
-        padding: 20px $gutter;
+        padding: 30px 40px;
         justify-content: space-between;
         background-color: $color-blue-dark;
     }
 
     &__socials {
-        gap: 15px;
+        gap: 20px;
         display: flex;
         align-items: center;
 
         img {
-            width: 32px;
-            height: 32px;
-            filter: grayscale(1);
-            opacity: 0.8;
-            transition: opacity 0.3s;
+            width: 28px;
+            height: 28px;
+            filter: grayscale(1) invert(1);
+            opacity: 0.6;
+            transition: all 0.3s ease;
 
             &:hover {
+                filter: grayscale(0) invert(0);
                 opacity: 1;
+                transform: translateY(-3px);
             }
         }
     }
 
     &__copyright {
         font-size: 14px;
-        opacity: 0.6;
+        opacity: 0.5;
     }
 }
 
 @include tablet {
     .footer {
-        padding-top: 50px;
+        padding-top: 40px;
 
         &__container {
             flex-direction: column;
-            gap: 20px;
+            padding: 40px 20px;
+            gap: 32px;
             text-align: center;
         }
 
-        &__middle,
-        &__bottom {
+        &__logo img {
+            height: 50px;
+        }
+
+        &__middle {
             flex-direction: column;
+            padding: 40px 20px;
+            gap: 40px;
+            align-items: center;
             text-align: center;
-            gap: 30px;
+        }
+
+        &__payment {
+            max-width: 100%;
         }
 
         &__payment-icons {
             justify-content: center;
+        }
+
+        &__bottom {
+            flex-direction: column-reverse;
+            padding: 30px 20px;
+            gap: 24px;
+            text-align: center;
+        }
+
+        &__nav a:hover {
+            transform: none;
+        }
+    }
+}
+
+@include mobile {
+    .footer {
+        padding-top: 30px;
+
+        &__container {
+            padding: 24px 16px;
+            gap: 20px;
+        }
+
+        &__logo img {
+            height: 32px;
+        }
+
+        &__info {
+            gap: 2px;
+            &-title {
+                font-size: 14px;
+            }
+            &-sub {
+                font-size: 11px;
+            }
+        }
+
+        &__middle {
+            padding: 30px 16px;
+            gap: 30px;
+        }
+
+        &__column-title {
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+
+        &__nav {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 20px;
+            text-align: left;
+            width: fit-content;
+            margin: 0 auto;
+
+            a {
+                font-size: 13px;
+                white-space: nowrap;
+            }
+        }
+
+        &__payment {
+            &-icons {
+                gap: 20px;
+                margin-bottom: 16px;
+
+                img {
+                    height: 20px;
+                }
+            }
+        }
+
+        &__legal-text {
+            font-size: 11px;
+            line-height: 1.4;
+            padding: 0;
+        }
+
+        &__bottom {
+            padding: 20px 16px;
+            gap: 16px;
+        }
+
+        &__socials {
+            gap: 16px;
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &__copyright {
+            font-size: 12px;
         }
     }
 }
