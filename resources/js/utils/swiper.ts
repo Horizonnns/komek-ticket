@@ -10,6 +10,6 @@ export const swiper = () => {
         effect: "fade",
         loop: true,
         fadeEffect: { crossFade: true },
-        autoplay: { delay: 1000, disableOnInteraction: false },
+        autoplay: { delay: 6000, disableOnInteraction: false },
     });
 };
