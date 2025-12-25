@@ -115,7 +115,7 @@
     align-items: flex-start;
     margin-bottom: 20px;
 
-    @media (max-width: 480px) {
+    @include mobile {
         flex-direction: column;
         align-items: stretch;
     }
@@ -207,7 +207,7 @@
     align-items: center;
     gap: 16px;
 
-    @media (max-width: 480px) {
+    @include mobile {
         flex-direction: column;
         align-items: stretch;
     }
@@ -259,5 +259,36 @@
 
     &:active {
         transform: translateY(0);
+    }
+}
+.ticket-status-paid {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    background: $color-success-light;
+    color: $color-success-dark;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    &::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e7e34'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+}
+
+.my-ticket-card--paid {
+    border-color: rgba($color-success, 0.2);
+
+    &:hover {
+        border-color: $color-success;
+        box-shadow: 0 12px 24px rgba($color-success, 0.1);
     }
 }
