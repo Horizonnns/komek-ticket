@@ -1,4 +1,5 @@
 import { saveTicket, ITicket } from "./myTickets";
+import { toast } from "./toast";
 
 export const initBookingSystem = () => {
     const modal = document.getElementById("booking-modal");
@@ -98,7 +99,10 @@ export const initBookingSystem = () => {
             document.querySelectorAll(".seat--selected").length;
 
         if (selectedSeatsCount === 0) {
-            alert("Пожалуйста, выберите хотя бы одно место");
+            toast.show({
+                message: "Пожалуйста, выберите хотя бы одно место",
+                type: "error",
+            });
             return;
         }
 
@@ -126,9 +130,10 @@ export const initBookingSystem = () => {
 
             saveTicket(newTicket);
 
-            alert(
-                `Успешно! \nВы забронировали мест: ${selectedSeatsCount}. \nСумма к оплате: ${total} ₸. \nИнструкция отправлена на ваш номер.`
-            );
+            toast.show({
+                message: `Вы забронировали ${selectedSeatsCount} мест(а). Инструкция отправлена на ваш номер.`,
+                type: "success",
+            });
 
             const modal = document.getElementById("booking-modal");
             if (modal) modal.style.display = "none";
