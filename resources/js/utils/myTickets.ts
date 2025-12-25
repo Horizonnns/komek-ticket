@@ -31,16 +31,34 @@ export const initMyTickets = () => {
             .map(
                 (ticket) => `
             <div class="my-ticket-card">
-                <div class="my-ticket-card__header">
-                    <span class="my-ticket-card__id">#${ticket.id}</span>
-                    <span class="my-ticket-card__date">${ticket.date}</span>
-                </div>
-                <div class="my-ticket-card__body">
-                    <h3 class="my-ticket-card__movie">${ticket.movie}</h3>
-                    <div class="my-ticket-card__info">
-                        <p><span>Время:</span> ${ticket.time}</p>
-                        <p><span>Зал:</span> ${ticket.hall}</p>
-                        <p><span>Места:</span> ${ticket.seats.join(", ")}</p>
+                <div class="my-ticket-card__content-wrapper">
+                    <div class="my-ticket-card__main">
+                        <div class="my-ticket-card__header">
+                            <span class="my-ticket-card__id">#${
+                                ticket.id
+                            }</span>
+                            <span class="my-ticket-card__date">${
+                                ticket.date
+                            }</span>
+                        </div>
+                        <div class="my-ticket-card__body">
+                            <h3 class="my-ticket-card__movie">${
+                                ticket.movie
+                            }</h3>
+                            <div class="my-ticket-card__info">
+                                <p><span>Время:</span> ${ticket.time}</p>
+                                <p><span>Зал:</span> ${ticket.hall}</p>
+                                <p><span>Места:</span> ${ticket.seats.join(
+                                    ", "
+                                )}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-ticket-card__qr">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${
+                            ticket.id
+                        }" alt="QR Code">
+                        <span>Сканируйте на входе</span>
                     </div>
                 </div>
                 <div class="my-ticket-card__footer">
@@ -69,7 +87,6 @@ export const initMyTickets = () => {
         }
     });
 
-    // Close on outside click
     myTicketsModal?.addEventListener("click", (e) => {
         if (e.target === myTicketsModal) {
             myTicketsModal.style.display = "none";
