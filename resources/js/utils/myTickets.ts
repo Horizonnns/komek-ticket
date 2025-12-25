@@ -1,3 +1,5 @@
+import { toast } from "./toast";
+
 export interface ITicket {
     id: string;
     movie: string;
@@ -30,7 +32,7 @@ export const initMyTickets = () => {
         ticketsContainer.innerHTML = tickets
             .map(
                 (ticket) => `
-            <div class="my-ticket-card">
+            <div class="my-ticket-card" data-id="${ticket.id}">
                 <div class="my-ticket-card__content-wrapper">
                     <div class="my-ticket-card__main">
                         <div class="my-ticket-card__header">
@@ -65,11 +67,47 @@ export const initMyTickets = () => {
                     <span class="my-ticket-card__total">Итого: ${
                         ticket.total
                     } ₸</span>
+                    <div class="my-ticket-card__actions">
+                        <button class="btn-ticket btn-ticket--cancel" data-action="cancel">Отменить</button>
+                        <button class="btn-ticket btn-ticket--pay" data-action="pay">Оплатить</button>
+                    </div>
                 </div>
             </div>
         `
             )
             .join("");
+
+        ticketsContainer.querySelectorAll(".btn-ticket").forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+                const target = e.currentTarget as HTMLElement;
+                const id = target
+                    .closest(".my-ticket-card")
+                    ?.getAttribute("data-id");
+                const action = target.getAttribute("data-action");
+
+                if (id && action === "cancel") {
+                    deleteTicket(id);
+                    renderTickets();
+                    toast.show({
+                        message: "Билет успешно отменен",
+                        type: "success",
+                    });
+                } else if (id && action === "pay") {
+                    toast.show({
+                        message: "Переход к оплате...",
+                        type: "success",
+                    });
+                }
+            });
+        });
+    };
+
+    const deleteTicket = (id: string) => {
+        const tickets: ITicket[] = JSON.parse(
+            localStorage.getItem("my_tickets") || "[]"
+        );
+        const updatedTickets = tickets.filter((t) => t.id !== id);
+        localStorage.setItem("my_tickets", JSON.stringify(updatedTickets));
     };
 
     myTicketsBtn?.addEventListener("click", () => {

@@ -205,10 +205,59 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
 .my-ticket-card__total {
     color: $color-dark;
     font-weight: 800;
     font-size: 18px;
+    white-space: nowrap;
+}
+
+.my-ticket-card__actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-ticket {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &--pay {
+        background: $color-primary;
+        color: $color-white;
+        box-shadow: 0 4px 12px rgba($color-primary, 0.2);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba($color-primary, 0.3);
+            filter: brightness(1.1);
+        }
+    }
+
+    &--cancel {
+        background: $color-bg-hover;
+        color: $color-text-muted;
+
+        &:hover {
+            background: $color-error-light;
+            color: $color-error-dark;
+            transform: translateY(-2px);
+        }
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
 }
