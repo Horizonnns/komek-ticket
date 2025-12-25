@@ -14,9 +14,9 @@
 .modal__content {
     background: $color-white;
     width: 95%;
-    max-width: 650px;
-    border-radius: 24px;
-    padding: 32px;
+    max-width: 550px;
+    border-radius: 20px;
+    padding: 24px;
     position: relative;
     border: 1px solid $color-border-thin;
     display: flex;
@@ -58,7 +58,7 @@
 .modal__info {
     font-size: 15px;
     color: $color-text-muted;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     font-weight: 500;
     display: flex;
     gap: 12px;
@@ -74,7 +74,7 @@
     width: 90%;
     height: 6px;
     background: $color-bg-tag;
-    margin: 0 auto 50px;
+    margin: 0 auto 40px;
     border-radius: 100px;
     position: relative;
     text-align: center;
@@ -98,7 +98,7 @@
     grid-template-columns: repeat(10, 1fr);
     gap: 10px;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     padding: 0 10px;
 }
 
@@ -134,8 +134,8 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     background: $color-bg-tag;
-    padding: 24px;
-    border-radius: 20px;
+    padding: 16px 20px;
+    border-radius: 16px;
     margin-bottom: 24px;
 
     .legend-item {
