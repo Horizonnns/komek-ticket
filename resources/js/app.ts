@@ -5,4 +5,5 @@ document.addEventListener("DOMContentLoaded", () => {
     utils.ticketAnimation();
     utils.initCalendarFilter();
     utils.initBookingSystem();
+    utils.initMyTickets();
 });

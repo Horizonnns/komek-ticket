@@ -1,3 +1,5 @@
+import { saveTicket, ITicket } from "./myTickets";
+
 export const initBookingSystem = () => {
     const modal = document.getElementById("booking-modal");
     const hallGrid = document.getElementById("hall-grid");
@@ -100,11 +102,29 @@ export const initBookingSystem = () => {
             return;
         }
 
+        const movieTitle =
+            document.getElementById("modal-movie-title")?.textContent || "";
+        const sessionTime =
+            document.getElementById("modal-session-time")?.textContent || "";
+        const hallName =
+            document.getElementById("modal-hall")?.textContent || "";
+        const total = parseInt(totalDisplay?.textContent || "0");
+
         confirmBtn.textContent = "Обработка...";
         confirmBtn.setAttribute("disabled", "true");
 
         setTimeout(() => {
-            const total = document.getElementById("total-amount")?.textContent;
+            const newTicket: ITicket = {
+                id: Math.random().toString(36).substr(2, 9).toUpperCase(),
+                movie: movieTitle,
+                time: sessionTime,
+                hall: hallName,
+                seats: [...selectedSeats],
+                total: total,
+                date: new Date().toLocaleDateString(),
+            };
+
+            saveTicket(newTicket);
 
             alert(
                 `Успешно! \nВы забронировали мест: ${selectedSeatsCount}. \nСумма к оплате: ${total} ₸. \nИнструкция отправлена на ваш номер.`

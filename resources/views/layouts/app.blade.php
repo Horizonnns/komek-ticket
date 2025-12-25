@@ -18,6 +18,7 @@
     </main>
 
     <x-booking-modal />
+    <x-tickets-modal />
 
     <x-footer />
   </div>
