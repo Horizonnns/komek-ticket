@@ -1,5 +1,6 @@
-import { saveTicket, ITicket } from "./myTickets";
+import { ITicket } from "./myTickets";
 import { toast } from "./toast";
+import { StorageService } from "./storage";
 
 export const initBookingSystem = () => {
     const modal = document.getElementById("booking-modal");
@@ -8,100 +9,99 @@ export const initBookingSystem = () => {
     const selectedSeatsDisplay = document.getElementById("selected-seats");
     const freeSeatsDisplay = document.getElementById("free-seats");
     const occupiedSeatsDisplay = document.getElementById("occupied-seats");
-    const sessionButtons = document.querySelectorAll(".session-item");
-    const confirmBtn = document.getElementById("confirm-booking");
-    const count = 60;
+    const confirmBtn = document.getElementById(
+        "confirm-booking"
+    ) as HTMLButtonElement;
 
     let selectedSeats: number[] = [];
     let currentTicketPrice = 0;
+    const totalSeats = 60;
 
-    sessionButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const movieTitle = btn.getAttribute("data-movie");
-            const sessionTime = btn.getAttribute("data-time");
-            const hallNumber = btn.getAttribute("data-hall");
+    const openModal = () => {
+        if (modal) {
+            modal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+        }
+    };
 
-            document.getElementById("modal-movie-title")!.textContent =
-                movieTitle || "";
-            document.getElementById("modal-session-time")!.textContent =
-                sessionTime || "";
-            document.getElementById(
-                "modal-hall"
-            )!.textContent = `Зал ${hallNumber}`;
+    const closeModal = () => {
+        if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+    };
 
-            const priceText =
-                btn.querySelector(".info span:last-child")?.textContent || "0";
-            currentTicketPrice = parseInt(priceText.replace(/\D/g, ""));
+    const updateUI = () => {
+        const occupiedCount =
+            hallGrid?.querySelectorAll(".seat--occupied").length || 0;
+        const selectedCount = selectedSeats.length;
+        const freeCount = totalSeats - occupiedCount - selectedCount;
 
-            if (modal) {
-                modal.style.display = "flex";
-                document.body.style.overflow = "hidden";
-            }
-            generateHall(count);
-        });
-    });
+        if (totalDisplay)
+            totalDisplay.textContent = (
+                selectedCount * currentTicketPrice
+            ).toString();
+        if (selectedSeatsDisplay)
+            selectedSeatsDisplay.textContent = selectedCount.toString();
+        if (freeSeatsDisplay)
+            freeSeatsDisplay.textContent = freeCount.toString();
+        if (occupiedSeatsDisplay)
+            occupiedSeatsDisplay.textContent = (
+                occupiedCount + selectedCount
+            ).toString();
+    };
 
-    function generateHall(count: number) {
+    const toggleSeat = (seat: HTMLElement, index: number) => {
+        if (seat.classList.contains("seat--occupied")) return;
+
+        seat.classList.toggle("seat--selected");
+        if (seat.classList.contains("seat--selected")) {
+            selectedSeats.push(index);
+        } else {
+            selectedSeats = selectedSeats.filter((s) => s !== index);
+        }
+        updateUI();
+    };
+
+    const generateHall = () => {
         if (!hallGrid) return;
         hallGrid.innerHTML = "";
         selectedSeats = [];
 
-        for (let i = 1; i <= count; i++) {
+        for (let i = 1; i <= totalSeats; i++) {
             const seat = document.createElement("div");
             seat.classList.add("seat");
 
             if (Math.random() < 0.2) seat.classList.add("seat--occupied");
 
-            seat.addEventListener("click", () => {
-                if (seat.classList.contains("seat--occupied")) return;
-
-                seat.classList.toggle("seat--selected");
-                const seatIndex = i;
-
-                if (seat.classList.contains("seat--selected")) {
-                    selectedSeats.push(seatIndex);
-                } else {
-                    selectedSeats = selectedSeats.filter(
-                        (s) => s !== seatIndex
-                    );
-                }
-                updateTotal();
-            });
-
+            seat.addEventListener("click", () => toggleSeat(seat, i));
             hallGrid.appendChild(seat);
         }
-        updateTotal();
-    }
+        updateUI();
+    };
 
-    function updateTotal() {
-        const occupiedCount =
-            hallGrid?.querySelectorAll(".seat--occupied").length || 0;
-        const selectedCount = selectedSeats.length;
-        const freeCount = count - occupiedCount - selectedCount;
+    const handleSessionClick = (btn: HTMLElement) => {
+        const movieTitle = btn.getAttribute("data-movie") || "";
+        const sessionTime = btn.getAttribute("data-time") || "";
+        const hallNumber = btn.getAttribute("data-hall") || "";
 
-        if (totalDisplay) {
-            totalDisplay.textContent = (
-                selectedCount * currentTicketPrice
-            ).toString();
-        }
-        if (selectedSeatsDisplay) {
-            selectedSeatsDisplay.textContent = selectedCount.toString();
-        }
-        if (freeSeatsDisplay) {
-            freeSeatsDisplay.textContent = freeCount.toString();
-        }
-        if (occupiedSeatsDisplay) {
-            occupiedSeatsDisplay.textContent = (
-                occupiedCount + selectedCount
-            ).toString();
-        }
-    }
+        document.getElementById("modal-movie-title")!.textContent = movieTitle;
+        document.getElementById("modal-session-time")!.textContent =
+            sessionTime;
+        document.getElementById(
+            "modal-hall"
+        )!.textContent = `Зал ${hallNumber}`;
 
-    confirmBtn?.addEventListener("click", () => {
-        const selectedSeatsCount =
-            document.querySelectorAll(".seat--selected").length;
+        const priceText =
+            btn.querySelector(".info span:last-child")?.textContent || "0";
+        currentTicketPrice = parseInt(priceText.replace(/\D/g, ""));
 
-        if (selectedSeatsCount === 0) {
+        openModal();
+        generateHall();
+    };
+
+    const handleConfirmBooking = () => {
+        if (selectedSeats.length === 0) {
             toast.show({
                 message: "Пожалуйста, выберите хотя бы одно место",
                 type: "error",
@@ -109,56 +109,58 @@ export const initBookingSystem = () => {
             return;
         }
 
-        const movieTitle =
-            document.getElementById("modal-movie-title")?.textContent || "";
-        const sessionTime =
-            document.getElementById("modal-session-time")?.textContent || "";
-        const hallName =
-            document.getElementById("modal-hall")?.textContent || "";
-        const total = parseInt(totalDisplay?.textContent || "0");
-
-        confirmBtn.textContent = "Обработка...";
-        confirmBtn.setAttribute("disabled", "true");
+        if (confirmBtn) {
+            confirmBtn.textContent = "Обработка...";
+            confirmBtn.disabled = true;
+        }
 
         setTimeout(() => {
             const newTicket: ITicket = {
                 id: Math.random().toString(36).substr(2, 9).toUpperCase(),
-                movie: movieTitle,
-                time: sessionTime,
-                hall: hallName,
+                movie:
+                    document.getElementById("modal-movie-title")?.textContent ||
+                    "",
+                time:
+                    document.getElementById("modal-session-time")
+                        ?.textContent || "",
+                hall: document.getElementById("modal-hall")?.textContent || "",
                 seats: [...selectedSeats],
-                total: total,
+                total: parseInt(totalDisplay?.textContent || "0"),
                 date: new Date().toLocaleDateString(),
             };
 
-            saveTicket(newTicket);
-
+            StorageService.saveTicket(newTicket);
             toast.show({
-                message: `Вы забронировали ${selectedSeatsCount} мест(а). Инструкция отправлена на ваш номер.`,
+                message: `Вы забронировали ${selectedSeats.length} мест(а). Инструкция отправлена на ваш номер.`,
                 type: "success",
             });
 
-            const modal = document.getElementById("booking-modal");
-            if (modal) modal.style.display = "none";
-            document.body.style.overflow = "auto";
+            closeModal();
 
-            confirmBtn.textContent = "Забронировать";
-            confirmBtn.removeAttribute("disabled");
+            if (confirmBtn) {
+                confirmBtn.textContent = "Забронировать";
+                confirmBtn.disabled = false;
+            }
 
-            document.querySelectorAll(".seat--selected").forEach((seat) => {
+            hallGrid?.querySelectorAll(".seat--selected").forEach((seat) => {
                 seat.classList.remove("seat--selected");
                 seat.classList.add("seat--occupied");
             });
-
             selectedSeats = [];
-            updateTotal();
+            updateUI();
         }, 1500);
+    };
+
+    const sessionButtons = document.querySelectorAll(".session-item");
+    sessionButtons.forEach((btn) => {
+        btn.addEventListener("click", () =>
+            handleSessionClick(btn as HTMLElement)
+        );
     });
 
-    document.querySelector(".modal__close")?.addEventListener("click", () => {
-        if (modal) {
-            modal.style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-    });
+    confirmBtn?.addEventListener("click", handleConfirmBooking);
+
+    document
+        .querySelector(".modal__close")
+        ?.addEventListener("click", closeModal);
 };
