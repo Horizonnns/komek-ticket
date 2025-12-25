@@ -4,7 +4,7 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: $color-overlay-dark;
     z-index: 1000;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,7 @@
 
     &__content {
         color: $color-blue;
-        background: #fff;
+        background: $color-white;
         padding: 30px;
         border-radius: 15px;
         width: 90%;
@@ -51,7 +51,7 @@
     color: $color-gray;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #e5e9f0;
+    background-color: $color-booking-bg;
 
     .legend-item {
         font-size: 14px;
@@ -64,12 +64,12 @@
 .hall-screen {
     width: 80%;
     height: 10px;
-    background: #ddd;
+    background: $color-screen;
     margin: 40px auto;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px $color-shadow-light;
     text-align: center;
     font-size: 10px;
-    color: #999;
+    color: $color-text-screen;
     text-transform: uppercase;
 }
 
@@ -84,13 +84,13 @@
 .seat {
     width: 30px;
     height: 30px;
-    background: #e2e2e2;
+    background: $color-seat-default;
     border-radius: 5px 5px 0 0;
     cursor: pointer;
     transition: all 0.2s;
 
     &:hover:not(.seat--occupied) {
-        background: #ccc;
+        background: $color-seat-hover;
     }
 
     &--selected {
@@ -98,7 +98,7 @@
     }
 
     &--occupied {
-        background: #444;
+        background: $color-seat-occupied;
         cursor: not-allowed;
     }
 }
@@ -127,7 +127,7 @@
     }
 
     &:disabled {
-        background-color: #ccc;
+        background-color: $color-seat-hover;
         cursor: not-allowed;
         transform: none !important;
     }
