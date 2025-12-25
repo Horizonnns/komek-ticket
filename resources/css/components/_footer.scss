@@ -3,7 +3,9 @@
 .footer {
     width: 100%;
     margin: 0 auto;
+    padding-top: 100px;
     color: $color-gray-light;
+    background-color: $color-white;
     max-width: $container-width;
 
     &__container {
@@ -110,6 +112,8 @@
 
 @include tablet {
     .footer {
+        padding-top: 50px;
+
         &__container {
             flex-direction: column;
             gap: 20px;

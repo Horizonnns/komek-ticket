@@ -1,25 +1,18 @@
 @use "../abstracts/index" as *;
 
-.controls {
-    padding: 10px 0;
-}
-
 .nav-bar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    // margin-bottom: 20px;
+    justify-content: space-between;
 
     &__links {
+        gap: 10px;
         display: flex;
-        gap: 30px;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 5px;
 
         a {
+            padding: 16px;
+            font-size: 14px;
             color: $color-dark;
-            font-weight: 500;
-            font-size: 16px;
             text-decoration: none;
 
             &.active {
@@ -37,29 +30,48 @@
             border-radius: 20px;
             font-weight: 600;
             border: none;
+            font-size: 14px;
+            transition: all 0.4s ease;
+
+            &:hover {
+                filter: brightness(1.1);
+                transform: translateY(-2px);
+            }
         }
 
         .btn-login {
-            background-color: $color-primary;
             color: white;
+            background-color: $color-primary;
         }
 
         .btn-review {
-            background-color: #f2f2f2;
             color: $color-dark;
+            background-color: $color-bg-tag;
+            transition: all 0.7s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                transition: all 0.2s ease;
+                background: $color-dark;
+                color: $color-white;
+            }
+
+            &:active {
+                color: $color-dark;
+                background: $color-bg-tag;
+                transition: all 0.2s ease;
+            }
         }
     }
 }
 
 .calendar-bar {
-    margin: 0 auto;
-    overflow-x: auto;
-    max-width: $container-width;
-    background-color: $color-white;
+    padding: 0 0 20px 0 !important;
 
     &__items {
         gap: 10px;
         display: flex;
+        overflow-x: auto;
         padding: 10px 40px;
         background-color: #f2f2f5;
     }
@@ -76,12 +88,62 @@
         transition: all 0.3s ease;
 
         &.active {
-            color: white;
+            color: $color-white;
             background-color: $color-primary;
         }
 
         &:hover:not(.active) {
             background-color: #f0f0f0;
+        }
+    }
+}
+
+@include tablet {
+    .nav-bar {
+        &__links {
+            gap: 5px;
+            padding: 5px 0;
+            flex-wrap: nowrap;
+
+            a {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+
+        &__actions {
+            display: none;
+
+            button {
+                flex: 1;
+                padding: 10px 15px;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+@include mobile {
+    .nav-bar {
+        &__links {
+            gap: 5px;
+            padding: 5px 0;
+            flex-wrap: nowrap;
+
+            a {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+
+        &__actions {
+            display: none;
+
+            button {
+                flex: 1;
+                padding: 10px 15px;
+                font-size: 12px;
+            }
         }
     }
 }
