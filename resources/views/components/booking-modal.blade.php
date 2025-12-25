@@ -9,7 +9,7 @@
       <span id="modal-hall">Зал</span>
     </div>
 
-    <div class="hall-screen">Экран</div>
+    <div class="hall-screen"></div>
     <div class="hall-grid" id="hall-grid">
     </div>
 
