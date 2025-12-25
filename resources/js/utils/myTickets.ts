@@ -8,6 +8,7 @@ export interface ITicket {
     seats: number[];
     total: number;
     date: string;
+    paid?: boolean;
 }
 
 export const initMyTickets = () => {
@@ -67,10 +68,16 @@ export const initMyTickets = () => {
                     <span class="my-ticket-card__total">Итого: ${
                         ticket.total
                     } ₸</span>
+                    ${
+                        ticket.paid
+                            ? '<span class="ticket-status-paid">Оплачено</span>'
+                            : `
                     <div class="my-ticket-card__actions">
                         <button class="btn-ticket btn-ticket--cancel" data-action="cancel">Отменить</button>
                         <button class="btn-ticket btn-ticket--pay" data-action="pay">Оплатить</button>
                     </div>
+                    `
+                    }
                 </div>
             </div>
         `
@@ -93,10 +100,17 @@ export const initMyTickets = () => {
                         type: "success",
                     });
                 } else if (id && action === "pay") {
-                    toast.show({
-                        message: "Переход к оплате...",
-                        type: "success",
-                    });
+                    const tickets: ITicket[] = JSON.parse(
+                        localStorage.getItem("my_tickets") || "[]"
+                    );
+                    const ticket = tickets.find((t) => t.id === id);
+                    if (ticket) {
+                        window.dispatchEvent(
+                            new CustomEvent("initPayment", {
+                                detail: { id: ticket.id, amount: ticket.total },
+                            })
+                        );
+                    }
                 }
             });
         });
@@ -109,6 +123,19 @@ export const initMyTickets = () => {
         const updatedTickets = tickets.filter((t) => t.id !== id);
         localStorage.setItem("my_tickets", JSON.stringify(updatedTickets));
     };
+
+    window.addEventListener("ticketPaid", (e: any) => {
+        const { id } = e.detail;
+        const tickets: ITicket[] = JSON.parse(
+            localStorage.getItem("my_tickets") || "[]"
+        );
+        const ticketIndex = tickets.findIndex((t) => t.id === id);
+        if (ticketIndex !== -1) {
+            tickets[ticketIndex].paid = true;
+            localStorage.setItem("my_tickets", JSON.stringify(tickets));
+            renderTickets();
+        }
+    });
 
     myTicketsBtn?.addEventListener("click", () => {
         renderTickets();
