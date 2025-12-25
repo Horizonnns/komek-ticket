@@ -135,7 +135,7 @@
     border-radius: 18px;
     border: 1px solid $color-border-thin;
     flex-shrink: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px $color-shadow-soft;
 
     img {
         width: 120px;

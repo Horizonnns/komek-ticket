@@ -22,7 +22,7 @@
     gap: 12px;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px $color-shadow-soft;
     animation: toast-luxury-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     transition: all 0.3s ease;
 
@@ -30,7 +30,7 @@
         background-color: $color-success-light;
         border: 1px solid rgba($color-success, 0.1);
         .toast__message {
-            color: darken($color-success, 15%);
+            color: $color-success-dark;
         }
         .toast__progress {
             background: $color-success;
@@ -41,7 +41,7 @@
         background-color: $color-error-light;
         border: 1px solid rgba($color-error, 0.1);
         .toast__message {
-            color: darken($color-error, 15%);
+            color: $color-error-dark;
         }
         .toast__progress {
             background: $color-error;
@@ -78,7 +78,7 @@
 
         &:hover {
             opacity: 0.8;
-            background: rgba(0, 0, 0, 0.05);
+            background: $color-border-thin;
         }
     }
 
