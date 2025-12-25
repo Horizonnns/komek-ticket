@@ -33,7 +33,10 @@ export const initBookingSystem = () => {
                 btn.querySelector(".info span:last-child")?.textContent || "0";
             currentTicketPrice = parseInt(priceText.replace(/\D/g, ""));
 
-            if (modal) modal.style.display = "flex";
+            if (modal) {
+                modal.style.display = "flex";
+                document.body.style.overflow = "hidden";
+            }
             generateHall(count);
         });
     });
@@ -153,6 +156,9 @@ export const initBookingSystem = () => {
     });
 
     document.querySelector(".modal__close")?.addEventListener("click", () => {
-        if (modal) modal.style.display = "none";
+        if (modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        }
     });
 };
