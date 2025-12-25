@@ -17,6 +17,8 @@
       @yield('content')
     </main>
 
+    <x-booking-modal />
+
     <x-footer />
   </div>
 </body>

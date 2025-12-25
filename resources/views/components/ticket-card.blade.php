@@ -27,7 +27,10 @@
     <div class="ticket-sessions">
       @isset($ticket['places'])
       @foreach($ticket['places'] as $place)
-      <button class="session-item">
+      <button class="session-item"
+        data-movie="{{ $ticket['title'] }}"
+        data-hall="{{ $place['hall'] }}"
+        data-time="{{ $place['time'] }}">
         <div class="session-box">
           <span class="time">{{ $place['time'] }}</span>
           <div class="info">
