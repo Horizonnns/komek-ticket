@@ -1,30 +1,44 @@
-type ToastType = "success" | "error";
+type TToastType = "success" | "error";
 
-interface ToastOptions {
+interface IToastOptions {
     message: string;
-    type?: ToastType;
+    type?: TToastType;
     duration?: number;
 }
 
-class ToastService {
-    private container: HTMLElement | null = null;
+let container: HTMLElement | null = null;
 
-    private createContainer() {
-        const container = document.createElement("div");
-        container.className = "toast-container";
-        document.body.appendChild(container);
-        this.container = container;
-    }
+const createContainer = () => {
+    const freshContainer = document.createElement("div");
+    freshContainer.className = "toast-container";
+    document.body.appendChild(freshContainer);
+    container = freshContainer;
+    return freshContainer;
+};
 
-    public show({ message, type = "success", duration = 4000 }: ToastOptions) {
-        if (!this.container) {
-            this.createContainer();
+const hide = (toastElement: HTMLElement) => {
+    if (toastElement.classList.contains("hiding")) return;
+
+    toastElement.classList.add("hiding");
+    toastElement.addEventListener("animationend", (e) => {
+        if ((e as AnimationEvent).animationName === "toast-luxury-out") {
+            toastElement.remove();
+            if (container && container.childNodes.length === 0) {
+                container.remove();
+                container = null;
+            }
         }
+    });
+};
 
-        const toast = document.createElement("div");
-        toast.className = `toast toast--${type}`;
+export const toast = {
+    show: ({ message, type = "success", duration = 4000 }: IToastOptions) => {
+        const currentContainer = container || createContainer();
 
-        toast.innerHTML = `
+        const toastElement = document.createElement("div");
+        toastElement.className = `toast toast--${type}`;
+
+        toastElement.innerHTML = `
             <div class="toast__content">
                 <span class="toast__message">${message}</span>
             </div>
@@ -32,35 +46,20 @@ class ToastService {
             <div class="toast__progress"></div>
         `;
 
-        const progress = toast.querySelector(".toast__progress") as HTMLElement;
+        const progress = toastElement.querySelector(
+            ".toast__progress"
+        ) as HTMLElement;
         if (progress && duration > 0) {
             progress.style.animation = `progress-animation ${duration}ms linear forwards`;
         }
 
-        const closeBtn = toast.querySelector(".toast__close");
-        closeBtn?.addEventListener("click", () => this.hide(toast));
+        const closeBtn = toastElement.querySelector(".toast__close");
+        closeBtn?.addEventListener("click", () => hide(toastElement));
 
-        this.container?.appendChild(toast);
+        currentContainer.appendChild(toastElement);
 
         if (duration > 0) {
-            setTimeout(() => this.hide(toast), duration);
+            setTimeout(() => hide(toastElement), duration);
         }
-    }
-
-    private hide(toast: HTMLElement) {
-        if (toast.classList.contains("hiding")) return;
-
-        toast.classList.add("hiding");
-        toast.addEventListener("animationend", (e) => {
-            if ((e as AnimationEvent).animationName === "toast-luxury-out") {
-                toast.remove();
-                if (this.container?.childNodes.length === 0) {
-                    this.container.remove();
-                    this.container = null;
-                }
-            }
-        });
-    }
-}
-
-export const toast = new ToastService();
+    },
+};
